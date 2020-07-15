@@ -7,4 +7,6 @@ window.onload = function() {
     allRegions[3].click();
     allProducts[3].click();
     displayTable();
+    drawHistogram(sourceData[8]);
+    drawLineChart(sourceData[8]);
 };
