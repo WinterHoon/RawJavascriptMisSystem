@@ -1,3 +1,5 @@
+
+import displayTable from './table';
 /*-----------checkbox相关操作------------*/
 
 //获取地区、产品选择和表格显示区域
@@ -70,4 +72,9 @@ function selectAll(arr) {
     }
     return true;
 }
-var tableWrapper = document.getElementById('table-wrapper');
+// var tableWrapper = document.getElementById('table-wrapper');
+
+export {
+    allRegions,
+    allProducts
+}

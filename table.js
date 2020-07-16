@@ -1,3 +1,8 @@
+
+import data from './data';
+import {allRegions, allProducts} from './checkbox';
+
+
 /*----------------表格展示相关操作----------------*/
 
 function getData() {
@@ -17,7 +22,7 @@ function getData() {
     //利用集合获取交集
     let set1 = new Set();
     let set2 = new Set();
-    for (let item of sourceData) {
+    for (let item of data) {
         for (let product of products) {
             if (item.product === product) {
                 set2.add(item);
@@ -37,6 +42,7 @@ function getData() {
 
 //显示表格的方法
 function displayTable() {
+    var tableWrapper = document.getElementById('table-wrapper');
     //先清除已经显示的表格
     if (tableWrapper.children){
         for (let child of tableWrapper.children) {
@@ -77,3 +83,5 @@ function displayTable() {
     tableWrapper.appendChild(table);
 
 }
+
+export default displayTable;

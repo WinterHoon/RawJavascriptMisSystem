@@ -112,3 +112,5 @@ function drawLineChart(data) {
         
     }
 }
+
+export default drawLineChart;
