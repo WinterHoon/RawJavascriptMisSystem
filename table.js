@@ -1,6 +1,8 @@
 
 import data from './data';
 import {allRegions, allProducts} from './checkbox';
+import { clearHistogram, drawHistogram } from './histogram';
+import { clearLineChart, drawLineChart } from './line_chart';
 
 
 /*----------------表格展示相关操作----------------*/
@@ -37,14 +39,11 @@ function getData() {
 
 
     }
-    // newData = [...set1].filter(item => set2.has(item));
-    //console.log(newData);
     return {
         newData: [...set1].filter(item => set2.has(item)),
         productsNum: products.length,
         regionsNum: regions.length
     };
-    // return newData;
     
 }
 
@@ -64,6 +63,7 @@ function displayTable() {
     var table = document.createElement('table');
     //制作表头
     var thRow = document.createElement('tr');
+    
     var tableHeads = ['商品','地区','一月','二月','三月','四月','五月','六月','七月','八月','九月','十月','十一月','十二月'];
     for(let i=0;i<tableHeads.length;i++) {
         let th = document.createElement('th');
@@ -80,6 +80,8 @@ function displayTable() {
 
             //只有商品选多个地区选一个的时候需要把地区放在第一列
             if (threeData.productsNum > 1 && threeData.regionsNum === 1) {
+                thRow.firstChild.textContent = '地区';
+                thRow.children[1].textContent = '商品';
                 td1.textContent = data[i].region;
                 td2.textContent = data[i].product;
                 //虽然每行都生成了一个“地区”单元格，但只有指定行添加进了表格
@@ -109,7 +111,20 @@ function displayTable() {
             table.appendChild(tr);
 
     }
-    
+    //为table绑定鼠标滑动事件，鼠标滑动时，显示指定行的柱状图和折线图
+    table.onmouseover = function (event) {
+        if (event.target.tagName.toLowerCase() === 'td') {
+            console.log(event.target.parentNode);
+            let tr = event.target.parentNode;
+            clearHistogram();
+            drawHistogram(getData().newData[tr.rowIndex - 1]);
+            clearLineChart();
+            drawLineChart(getData().newData[tr.rowIndex - 1]);
+        }
+        
+
+    }
+   
     tableWrapper.appendChild(table);
 
 }

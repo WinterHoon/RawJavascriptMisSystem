@@ -1,3 +1,8 @@
+//清空柱状图 canvas的高度或宽度被重设，画布就会被清空
+function clearHistogram () {
+    var canvas = document.getElementById('histogram');
+    canvas.height = canvas.height;
+}
 function drawHistogram(data) {
 
     var canvas = document.getElementById("histogram");
@@ -97,4 +102,7 @@ function drawHistogram(data) {
     }
 }
 
-export default drawHistogram;
+export {
+    clearHistogram,
+    drawHistogram
+};

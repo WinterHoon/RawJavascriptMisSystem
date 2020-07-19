@@ -1,4 +1,9 @@
 "use strict";
+//清空折线图 canvas的高度或宽度被重设，画布就会被清空
+function clearLineChart() {
+    var canvas = document.getElementById('line-chart');
+    canvas.height = canvas.height;
+}
 function drawLineChart(data) {
     var canvas = document.getElementById("line-chart");
     if (canvas && canvas.getContext) {
@@ -113,4 +118,7 @@ function drawLineChart(data) {
     }
 }
 
-export default drawLineChart;
+export {
+    clearLineChart,
+    drawLineChart
+};

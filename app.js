@@ -7,8 +7,8 @@ import data from './data';
 import displayTable from './table';
 import { allRegions, allProducts } from './checkbox';
 
-import drawHistogram from './histogram';
-import drawLineChart from './line_chart';
+import { clearHistogram, drawHistogram } from './histogram';
+import { clearLineChart, drawLineChart } from './line_chart';
 
 import './style.css';
 window.onload = function() {
