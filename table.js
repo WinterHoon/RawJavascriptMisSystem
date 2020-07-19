@@ -2,7 +2,7 @@
 import data from './data';
 import {allRegions, allProducts} from './checkbox';
 import { clearHistogram, drawHistogram } from './histogram';
-import { clearLineChart, drawLineChart } from './line_chart';
+import { clearLineChart, drawLineChart, drawMultpleLines } from './line_chart';
 
 
 /*----------------表格展示相关操作----------------*/
@@ -57,7 +57,7 @@ function displayTable() {
         }
     } 
     let threeData = getData();
-    console.log(threeData);
+    // console.log(threeData);
     var data = threeData.newData;
     
     var table = document.createElement('table');
@@ -87,7 +87,7 @@ function displayTable() {
                 //虽然每行都生成了一个“地区”单元格，但只有指定行添加进了表格
                 if (i % threeData.productsNum === 0) {
                     td1.rowSpan = threeData.productsNum;
-                    console.log(td1);
+                    // console.log(td1);
                     tr.appendChild(td1);    
                 }
             //其余情况都是商品放在第一列
@@ -97,7 +97,7 @@ function displayTable() {
                 //虽然每行都生成了一个“商品”单元格，但只有指定行添加进了表格
                 if (i % threeData.regionsNum === 0) {
                     td1.rowSpan = threeData.regionsNum;
-                    console.log(td1);
+                    // console.log(td1);
                     tr.appendChild(td1);
                 }   
             }
@@ -114,19 +114,24 @@ function displayTable() {
     //为table绑定鼠标滑动事件，鼠标滑动时，显示指定行的柱状图和折线图
     table.onmouseover = function (event) {
         if (event.target.tagName.toLowerCase() === 'td') {
-            console.log(event.target.parentNode);
+            // console.log(event.target.parentNode);
             let tr = event.target.parentNode;
             clearHistogram();
             drawHistogram(getData().newData[tr.rowIndex - 1]);
             clearLineChart();
             drawLineChart(getData().newData[tr.rowIndex - 1]);
         }
-        
+    }
 
+    table.onmouseout = function () {
+        drawMultpleLines(getData().newData);
     }
    
     tableWrapper.appendChild(table);
 
 }
 
-export default displayTable;
+export {
+    getData,
+    displayTable
+};

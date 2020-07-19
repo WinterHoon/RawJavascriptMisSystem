@@ -1,5 +1,6 @@
 
-import displayTable from './table';
+import { getData, displayTable } from './table';
+import { clearLineChart, drawLineChart, drawMultpleLines } from './line_chart';
 /*-----------checkbox相关操作------------*/
 
 //获取地区、产品选择和表格显示区域
@@ -50,6 +51,7 @@ function bindChangeEvent(arr) {
                 arr[arr.length - 1].checked = false;
             }
             displayTable();
+            drawMultpleLines(getData().newData);
         };
     }
 }
